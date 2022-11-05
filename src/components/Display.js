@@ -7,9 +7,10 @@ const Display = () => {
     const [records, setRecords] = useState([]);
     // This method fetches the records from the database.
     // console.log("yuh");
+    const port = "5000";
     useEffect(() => {
         async function getRecords() {
-            const response = await fetch(`http://localhost:5000/record/`);
+            const response = await fetch(`http://localhost:`+port+`/record/`);
             console.log(response);
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
@@ -27,6 +28,8 @@ const Display = () => {
         <div>
           <h3>Record List</h3>
           <PieGraph records={records}/>
+          <LineGraph records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'}/>
+          <LineGraph records={records} timeMin={'2022-10-31T18:12:02.984Z'}/>
           <LineGraph records={records}/>
         </div>
       );
