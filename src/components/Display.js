@@ -33,9 +33,9 @@ const Display = () => {
 
       return (
         <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee"}}>
-          <h1 style={{paddingLeft: "100px"}}>Current Data</h1>
+          <h1>Current Data</h1>
           <Container>
-            <p>Last Measured: {latestTime}</p>
+            <p style={{color: "#999"}}>Last Measured: {latestTime}</p>
             <Row>
               <Col sm={3}>
                 <Card style={{padding: "30px"}}>
@@ -51,7 +51,7 @@ const Display = () => {
               </Col>
             </Row>
           </Container>
-          <h1 style={{paddingLeft: "100px"}}>Graphs</h1>
+          <h1>Graphs</h1>
           <Container>
             <Row>
               <Col sm={8}>

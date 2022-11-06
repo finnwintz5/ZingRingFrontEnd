@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
  
 const Record = (props) => (
  <tr>
@@ -7,8 +8,8 @@ const Record = (props) => (
    <td>{props.record.tiredness}</td>
    <td>{props.record.heartbeet}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
-     <button className="btn btn-link"
+     <Link className="btn btn-link" to={`/edit/${props.record._id}`}  style={{color: "rgb(75, 192, 192)"}}>Edit</Link> |
+     <button className="btn btn-link"  style={{color: "rgba(255, 99, 132)"}}
        onClick={() => {
          props.deleteRecord(props.record._id);
        }}
@@ -67,19 +68,21 @@ export default function RecordList() {
  
  // This following section will display the table with the records of individuals.
  return (
-   <div style={{padding: "50px", paddingInline: "200px"}}>
-     <h3>Record List</h3>
-     <table className="table table-striped" style={{ marginTop: 20 }}>
-       <thead>
-         <tr>
-           <th>Date</th>
-           <th>Tiredness</th>
-           <th>Heartbeat</th>
-           <th>Modify</th>
-         </tr>
-       </thead>
-       <tbody>{recordList()}</tbody>
-     </table>
+   <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee"}}>
+     <h1>Record List</h1>
+     <Card style={{paddingInline: "50px"}}>
+      <table className="table table-striped" style={{ marginTop: 20 }}>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Tiredness</th>
+            <th>Heartbeat</th>
+            <th>Modify</th>
+          </tr>
+        </thead>
+        <tbody>{recordList()}</tbody>
+      </table>
+     </Card>
    </div>
  );
 }
