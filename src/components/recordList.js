@@ -67,16 +67,15 @@ export default function RecordList() {
  
  // This following section will display the table with the records of individuals.
  return (
-   <div>
+   <div style={{padding: "50px", paddingInline: "200px"}}>
      <h3>Record List</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
            <th>Date</th>
-           <th>Time</th>
            <th>Tiredness</th>
            <th>Heartbeat</th>
-           <th>Action</th>
+           <th>Modify</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>

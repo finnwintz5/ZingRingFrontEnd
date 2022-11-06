@@ -3,8 +3,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieGraph = ({records}) => {
-    console.log("PieGraph");
-    console.log(records);
     const data = {
         labels: ["Tired", "Not Tired"],
         datasets: [
@@ -17,10 +15,23 @@ const PieGraph = ({records}) => {
           }
         ]
       };
+
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top"
+          },
+          title: {
+            display: true,
+            text: "% Tiredness"
+          }
+        },
+      }
+
       return (
         <div>
-            {/* <p>{test}</p> */}
-            <Pie data={data} />
+            <Pie data={data}  style={{padding: "30px"}} options={options}/>
         </div>
       )
       

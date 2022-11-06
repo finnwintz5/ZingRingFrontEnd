@@ -36,7 +36,7 @@ const LineGraph = ({records, timeMin, timeMax}) => {
           },
           title: {
             display: true,
-            text: "Chart.js Line Chart"
+            text: "Hearbeat vs. Time"
           }
         },
         scales: {
@@ -69,7 +69,7 @@ const LineGraph = ({records, timeMin, timeMax}) => {
         ]
       };
 
-      return <Line options={options} data={data} />;
+      return <Line options={options} data={data} style={{padding: "10px"}}/>;
 }
 
 export default LineGraph;
