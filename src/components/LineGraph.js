@@ -42,7 +42,6 @@ const LineGraph = ({records}) => {
         ]
       };
       return <Line options={options} data={data} />;
-      
 }
 
 export default LineGraph;

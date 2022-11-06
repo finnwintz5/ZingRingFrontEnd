@@ -3,8 +3,11 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieGraph = ({records}) => {
+    
+
     console.log("PieGraph");
     console.log(records);
+    // var filtered = records.filter(function(a){return +(a[0]) >= 8;};
     const data = {
         labels: ["Tired", "Not Tired"],
         datasets: [
@@ -19,11 +22,9 @@ const PieGraph = ({records}) => {
       };
       return (
         <div>
-            {/* <p>{test}</p> */}
             <Pie data={data} />
         </div>
       )
-      
 }
 
 export default PieGraph;
