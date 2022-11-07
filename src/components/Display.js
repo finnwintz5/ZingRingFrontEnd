@@ -29,7 +29,7 @@ const Display = () => {
             setLast(String(records[records.length-1].datetime));
             const dateString = records[records.length-1].datetime;
             const date = parse(dateString, 'yyyyMMddHHmmss', new Date());
-            setLatestTime(records[records.length-1].datetime);
+            setLatestTime(date);
             //console.log(date);
         }
         getRecords();
