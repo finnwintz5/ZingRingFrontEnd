@@ -5,10 +5,10 @@ import { Route, Routes } from "react-router-dom";
  
 // We import all the components we need in our app
 import Navbar from "./components/NavigationBar";
-import RecordList from "./components/recordList";
-import Edit from "./components/edit";
-import Create from "./components/create";
-import Display from "./components/Display";
+import RecordList from "./components/Log";
+import Edit from "./components/archived/edit";
+import Create from "./components/archived/create";
+import Display from "./components/Analysis";
 
  
 const App = () => {
@@ -16,10 +16,10 @@ const App = () => {
    <div>
      <Navbar />
      <Routes>
-       <Route exact path="/" element={<RecordList />} />
+       <Route exact path="/log" element={<RecordList />} />
        <Route path="/edit/:id" element={<Edit />} />
-       <Route path="/create" element={<Create />} />
-       <Route path="/display" element={<Display />} />
+       {/* <Route path="/create" element={<Create />} /> */}
+       <Route path="/" element={<Display />} />
 
      </Routes>
    </div>
