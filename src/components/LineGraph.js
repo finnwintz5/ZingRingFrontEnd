@@ -7,12 +7,32 @@ ChartJS.register(LinearScale, PointElement, Tooltip, Legend, TimeScale);
 
 const LineGraph = ({records, timeMin, timeMax}) => {  
     const [recordsFormat, setRecordsFormat] = useState([]);
+    const [newMin, setNewMin] = useState(null);
+    const [newMax, setNewMax] = useState(null);
+
+    useEffect(() => {
+      if(timeMin !== null){
+        var nm = timeMin.substring(0,4)+"-"+timeMin.substring(4,6)+"-"+timeMin.substring(6,8)+"T"+timeMin.substring(8,10)+":"+timeMin.substring(10,12)+":"+timeMin.substring(12,14)+".000Z";
+        setNewMin(nm);
+      }
+      if(timeMax !== null){
+        var nm = timeMax.substring(0,4)+"-"+timeMax.substring(4,6)+"-"+timeMax.substring(6,8)+"T"+timeMax.substring(8,10)+":"+timeMax.substring(10,12)+":"+timeMax.substring(12,14)+".000Z";
+        setNewMax(nm);
+      }
+    }, [timeMin, timeMax])
 
     useEffect(() => {
       var HeartTime = [];
       records.forEach(function (item, index) {
-        var dt = new Date(item.datetime);
-        HeartTime.push({x: dt, y: item.heartbeet});
+        var temp = String(item.datetime);
+        if(temp !== null) {
+          var at = temp.substring(0,4)+"-"+temp.substring(4,6)+"-"+temp.substring(6,8)+"T"+temp.substring(8,10)+":"+temp.substring(10,12)+":"+temp.substring(12,14)+".000Z";
+          var dt = new Date(at);
+          HeartTime.push({x: dt, y: item.heartbeet});
+        }
+      });
+      HeartTime.sort(function(a,b){
+        return b.x - a.x;
       });
       setRecordsFormat(HeartTime);
     }, [records])
@@ -49,8 +69,8 @@ const LineGraph = ({records, timeMin, timeMax}) => {
                 text: 'Date'
               },
               
-              min: timeMin,
-              max: timeMax
+              min: newMin,
+              max: newMax
             }
           
         }

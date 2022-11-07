@@ -20,7 +20,7 @@ const PieGraph = ({records}) => {
                 + prop_len(currentdate.getHours()) + ":"  
                 +prop_len(currentdate.getMinutes()) + ":" 
                 + prop_len(currentdate.getSeconds());
-    console.log(datetime);
+    //console.log(datetime);
   for (let r in records) {
     // if (records[r]["_id"]<)
     if (records[r]["tiredness"]==0) {
@@ -29,7 +29,7 @@ const PieGraph = ({records}) => {
       not_tired_count+=1;
     }
   }
-  console.log(records);
+  //console.log(records);
     const data = {
         labels: ["Tired", "Not Tired"],
         datasets: [

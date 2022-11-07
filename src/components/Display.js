@@ -5,14 +5,13 @@ import './style/display.css';
 import format from "date-fns/format";
 import parse from "date-fns/parse";
 
-
 const Display = () => {
     const [records, setRecords] = useState([]);
     const [latestTime, setLatestTime] = useState(null);
     const [latestTiredness, setLatestTiredness] = useState("");
     const [latestHearbeat, setLatestHearbeat] = useState("");
-    const [last, setLast] = useState(null);
-    const port = "5000";
+    const [last, setLast] = useState("");
+    const port = "8080";
 
     useEffect(() => {
         async function getRecords() {
@@ -25,14 +24,13 @@ const Display = () => {
             }
             const records = await response.json();
             setRecords(records);
-            console.log(records[records.length-1]);
             setLatestHearbeat(records[records.length-1].heartbeet);
             setLatestTiredness(records[records.length-1].tiredness);
-            setLast(records[records.length-1].datetime);
-            const dateString = records[records.length-1];
-            const date = parse(dateString, 'yyyyMMddHHmmss', new Date())
-            setLatestTime(date);
-            console.log(records);
+            setLast(String(records[records.length-1].datetime));
+            const dateString = records[records.length-1].datetime;
+            const date = parse(dateString, 'yyyyMMddHHmmss', new Date());
+            setLatestTime(records[records.length-1].datetime);
+            //console.log(date);
         }
         getRecords();
         return;
@@ -42,12 +40,12 @@ const Display = () => {
         <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee"}}>
           <h1>Current Data</h1>
           <Container>
-            {/* <p style={{color: "#999"}}>Last Measured: {latestTime === null ? "" : format(latestTime, 'EEEE, MMMM do, yyyy hh:mm a')}</p> */}
+            <p style={{color: "#999"}}>Last Measured: {latestTime === null ? "" : format(latestTime, 'EEEE, MMMM do, yyyy hh:mm a')}</p>
             <Row>
               <Col sm={3}>
                 <Card style={{padding: "30px"}}>
                   <Card.Title>Tiredness</Card.Title>
-                  <Card.Text>{latestTiredness ? "True" : "False"}</Card.Text>
+                  <Card.Text>{latestTiredness}</Card.Text>
                 </Card>
               </Col>
               <Col sm={3}>
@@ -60,9 +58,10 @@ const Display = () => {
           </Container>
           <h1>Graphs</h1>
           <Container>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Last Week: "/>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={last} range="Last Month: "/>
-            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="All Time: "/>
+            <BothCharts records={records} timeMin={'20221107000000'} timeMax={last === "" ? '20221108000000' : last} range="Today: "/>
+            <BothCharts records={records} timeMin={'20221101000000'} timeMax={last === "" ? '20221108000000' : last} range="Last Week: "/>
+            <BothCharts records={records} timeMin={'20221008000000'} timeMax={last === "" ? '20221108000000' : last} range="Last Month: "/>
+            <BothCharts records={records} timeMin={'20211008000000'} timeMax={last === "" ? '20221108000000' : last} range="Last Year: "/>
         </Container>
         </div>
       );
