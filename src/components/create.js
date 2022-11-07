@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
- 
+import { Card } from "react-bootstrap";
+
 export default function Create() {
  const [form, setForm] = useState({
    tiredness: "",
@@ -40,8 +41,9 @@ export default function Create() {
  
  // This following section will display the form that takes the input from the user.
  return (
-   <div>
-     <h3>Create New Record</h3>
+  <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee", minHeight: "100vh"}}>
+     <h1>Create New Record</h1>
+     <Card style={{padding: "20px"}}>
      <form onSubmit={onSubmit}>
        <div className="form-group">
          <label htmlFor="position">Heartbeat</label>
@@ -51,6 +53,7 @@ export default function Create() {
            id="position"
            value={form.heartbeet}
            onChange={(e) => updateForm({ heartbeet: e.target.value })}
+           style={{marginBlock: "15px"}}
          />
        </div>
        <div className="form-group">
@@ -79,14 +82,16 @@ export default function Create() {
            <label htmlFor="positionTired" className="form-check-label">Not Tired</label>
          </div>
        </div>
-       <div className="form-group">
+       <div className="form-group" style={{marginBlock: "15px"}}>
          <input
            type="submit"
            value="Create log entry"
            className="btn btn-primary"
+           style={{backgroundColor: "rgba(75, 192, 192, 0.2)", color: "rgba(75, 192, 192, 1)", borderColor: "rgba(75, 192, 192, 1)", borderWidth: "2px"}}
          />
        </div>
      </form>
+     </Card>
    </div>
  );
 }

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
- 
+import { Card } from "react-bootstrap";
+
+const port = "5000";
+
 const Record = (props) => (
  <tr>
   <td>{props.record._id}</td>
    <td>{props.record.tiredness}</td>
    <td>{props.record.heartbeet}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
-     <button className="btn btn-link"
+     <Link className="btn btn-link" to={`/edit/${props.record._id}`}  style={{color: "rgb(75, 192, 192)"}}>Edit</Link> |
+     <button className="btn btn-link"  style={{color: "rgba(255, 99, 132)"}}
        onClick={() => {
          props.deleteRecord(props.record._id);
        }}
@@ -24,7 +27,7 @@ export default function RecordList() {
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`http://localhost:5000/record/`);
+     const response = await fetch(`http://localhost:`+port+`/record/`);
     console.log(response);
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -43,7 +46,7 @@ export default function RecordList() {
  
  // This method will delete a record
  async function deleteRecord(id) {
-   await fetch(`http://localhost:5000/${id}`, {
+   await fetch(`http://localhost:${port}/${id}`, {
      method: "DELETE"
    });
  
@@ -66,20 +69,21 @@ export default function RecordList() {
  
  // This following section will display the table with the records of individuals.
  return (
-   <div>
-     <h3>Record List</h3>
-     <table className="table table-striped" style={{ marginTop: 20 }}>
-       <thead>
-         <tr>
-           <th>Date</th>
-           <th>Time</th>
-           <th>Tiredness</th>
-           <th>Heartbeat</th>
-           <th>Action</th>
-         </tr>
-       </thead>
-       <tbody>{recordList()}</tbody>
-     </table>
+   <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee"}}>
+     <h1>Record List</h1>
+     <Card style={{paddingInline: "50px"}}>
+      <table className="table table-striped" style={{ marginTop: 20 }}>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Tiredness</th>
+            <th>Heartbeat</th>
+            <th>Modify</th>
+          </tr>
+        </thead>
+        <tbody>{recordList()}</tbody>
+      </table>
+     </Card>
    </div>
  );
 }
