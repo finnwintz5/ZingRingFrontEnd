@@ -5,7 +5,6 @@ import './style/display.css';
 import format from "date-fns/format";
 import parse from "date-fns/parse";
 
-
 const Display = () => {
     const [records, setRecords] = useState([]);
     const [latestTime, setLatestTime] = useState(null);
@@ -28,11 +27,11 @@ const Display = () => {
             console.log(records[records.length-1]);
             setLatestHeartbeat(records[records.length-1].heartbeet);
             setLatestTiredness(records[records.length-1].tiredness);
-            setLast(records[records.length-1].datetime);
-            const dateString = records[records.length-1];
-            const date = parse(dateString, 'yyyyMMddHHmmss', new Date())
-            setLatestTime(date);
-            // console.log(records);
+            setLast(String(records[records.length-1].datetime));
+            const dateString = records[records.length-1].datetime;
+            const date = parse(dateString, 'yyyyMMddHHmmss', new Date());
+            setLatestTime(records[records.length-1].datetime);
+            //console.log(date);
         }
         getRecords();
         return;
@@ -42,7 +41,7 @@ const Display = () => {
         <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee"}}>
           <h1>Current Data</h1>
           <Container>
-            {/* <p style={{color: "#999"}}>Last Measured: {latestTime === null ? "" : format(latestTime, 'EEEE, MMMM do, yyyy hh:mm a')}</p> */}
+            <p style={{color: "#999"}}>Last Measured: {latestTime === null ? "" : format(latestTime, 'EEEE, MMMM do, yyyy hh:mm a')}</p>
             <Row>
               <Col sm={3}>
                 <Card style={{padding: "30px"}}>
@@ -60,11 +59,11 @@ const Display = () => {
           </Container>
           <h1>Graphs</h1>
           <Container>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Day"/>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Week"/>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={last} range="Month"/>
-            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="Year"/>
-            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="All"/>
+            <BothCharts records={records} range="Day"/>
+            <BothCharts records={records} range="Week"/>
+            <BothCharts records={records} range="Month"/>
+            <BothCharts records={records} range="Year"/>
+            <BothCharts records={records} range="All"/>
         </Container>
         </div>
       );

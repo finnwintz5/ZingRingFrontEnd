@@ -52,7 +52,7 @@ function get_current_datetime(range) {
     return datetime;
   }
 
-const BothCharts = ({records, timeMin, timeMax, range}) => {
+const BothCharts = ({records, range}) => {
     const formatDate = (datetime) => {
         if(datetime !== null){
             let str_version=datetime.toString();
@@ -80,7 +80,7 @@ const BothCharts = ({records, timeMin, timeMax, range}) => {
             <p>{"["+formatDate(start_time)+"] to ["+formatDate(end_time)+"]"}</p>
             <Row>
                 <Col sm={8}>
-                        {/* <LineGraph records={records} timeMin={timeMin} timeMax={timeMax}/> */}
+                    <LineGraph records={records} timeMin={start_time} timeMax={end_time}/>
                 </Col>
                 <Col sm={4}>
                         <PieGraph records={records} start_time={start_time} range={range}/>
