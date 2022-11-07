@@ -21,7 +21,7 @@ const BothCharts = ({records, timeMin, timeMax, range}) => {
                     <LineGraph records={records} timeMin={timeMin} timeMax={timeMax}/>
                 </Col>
                 <Col sm={4}>
-                        <PieGraph records={records} timeMin={timeMin} timeMax={timeMax}/>
+                        <PieGraph records={records} timeMin={timeMin} timeMax={timeMax} range={range}/>
                 </Col>
             </Row>
         </Card>

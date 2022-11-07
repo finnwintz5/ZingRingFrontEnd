@@ -3,33 +3,69 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function prop_len(str) {
-  if (str.length==2) {
-    console.log("len2");
-    return str;
+  let temp=str.toString();
+  if (temp.length==1) {
+    return "0"+temp;
   }
-  return "0"+str;
+  return temp;
 }
 
-const PieGraph = ({records}) => {
+function month_day(day,month,days_sub) {
+  if (days_sub>=day) {
+    month-=1;
+    day=31-(days_sub-day);
+  } else {
+    day-=days_sub;
+  }
+  return (prop_len(month)+prop_len(day));
+}
+
+function get_current_datetime(range) {
+  var currentdate = new Date();
+  var datetime="";
+  console.log(range);
+  if (range=="Year") {
+    datetime+=prop_len(currentdate.getFullYear()-1);
+  } else {
+    datetime+=prop_len(currentdate.getFullYear());
+  }
+  if (range=="Month") {
+    datetime+=prop_len(currentdate.getMonth());
+    datetime+=prop_len(currentdate.getDate());
+  } else if (range=="Week") {
+    datetime+=month_day(currentdate.getDate(),currentdate.getMonth()+1,7);
+  } else if (range=="Day") {
+    datetime+=month_day(currentdate.getDate(),currentdate.getMonth()+1,1);
+  } else {
+    datetime+=prop_len(currentdate.getMonth()+1);
+    datetime+=prop_len(currentdate.getDate());
+  }
+  datetime+= prop_len(currentdate.getHours())+prop_len(currentdate.getMinutes())+ prop_len(currentdate.getSeconds());
+  // console.log(datetime);
+  return datetime
+}
+
+
+const PieGraph = ({records,range}) => {
   let tired_count=0;
   let not_tired_count=0;
-  var currentdate = new Date();
-  var datetime = + prop_len(currentdate.getFullYear()) + " @ "  
-                +  prop_len(currentdate.getDate()) + "/"
-                + prop_len(currentdate.getMonth()+1)  + "/" 
-                + prop_len(currentdate.getHours()) + ":"  
-                +prop_len(currentdate.getMinutes()) + ":" 
-                + prop_len(currentdate.getSeconds());
-    //console.log(datetime);
+  var datetime=parseInt(get_current_datetime(range));
+  // console.log(typeof(datetime));
   for (let r in records) {
-    // if (records[r]["_id"]<)
-    if (records[r]["tiredness"]==0) {
-      tired_count+=1;
-    } else {
-      not_tired_count+=1;
+    console.log(r);
+    console.log(records[r]["datetime"]);
+    console.log(datetime);
+    if (records[r]["datetime"]>datetime) {
+      if (records[r]["tiredness"]==0) {
+        tired_count+=1;
+      } else {
+        not_tired_count+=1;
+      }
     }
+    
+    
   }
-  //console.log(records);
+  // console.log(records);
     const data = {
         labels: ["Tired", "Not Tired"],
         datasets: [
