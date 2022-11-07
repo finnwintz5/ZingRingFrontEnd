@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import PieGraph from "./PieGraph";
-import LineGraph from "./LineGraph";
+import BothCharts from "./BothCharts";
 import './style/display.css';
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+
 
 const Display = () => {
     const [records, setRecords] = useState([]);
-    const [latestTime, setLatestTime] = useState("");
+    const [latestTime, setLatestTime] = useState(null);
     const [latestTiredness, setLatestTiredness] = useState("");
     const [latestHearbeat, setLatestHearbeat] = useState("");
+    const [last, setLast] = useState(null);
     const port = "5000";
 
     useEffect(() => {
         async function getRecords() {
             const response = await fetch(`http://localhost:`+port+`/record/`);
-            console.log(response);
+            //console.log(response);
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
                 window.alert(message);
@@ -23,9 +26,13 @@ const Display = () => {
             const records = await response.json();
             setRecords(records);
             console.log(records[records.length-1]);
-            setLatestTime(records[records.length-1]._id);
             setLatestHearbeat(records[records.length-1].heartbeet);
             setLatestTiredness(records[records.length-1].tiredness);
+            setLast(records[records.length-1].datetime);
+            const dateString = records[records.length-1];
+            const date = parse(dateString, 'yyyyMMddHHmmss', new Date())
+            setLatestTime(date);
+            console.log(records);
         }
         getRecords();
         return;
@@ -35,7 +42,7 @@ const Display = () => {
         <div style={{padding: "50px", paddingInline: "200px", backgroundColor: "#eee"}}>
           <h1>Current Data</h1>
           <Container>
-            <p style={{color: "#999"}}>Last Measured: {latestTime}</p>
+            {/* <p style={{color: "#999"}}>Last Measured: {latestTime === null ? "" : format(latestTime, 'EEEE, MMMM do, yyyy hh:mm a')}</p> */}
             <Row>
               <Col sm={3}>
                 <Card style={{padding: "30px"}}>
@@ -53,30 +60,9 @@ const Display = () => {
           </Container>
           <h1>Graphs</h1>
           <Container>
-            <Row>
-              <Col sm={8}>
-                <Card className="graph-card">
-                  <LineGraph records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'}/>
-                </Card>
-                <Card className="graph-card">
-                  <LineGraph records={records} timeMin={'2022-10-31T18:12:02.984Z'}/>
-                </Card>
-                <Card className="graph-card">
-                  <LineGraph records={records}/>
-                </Card>
-              </Col>
-              <Col sm={4}>
-                <Card className="graph-card">
-                  <PieGraph records={records}/>
-                </Card>
-                <Card className="graph-card">
-                  <PieGraph records={records}/>
-                </Card>
-                <Card className="graph-card">
-                  <PieGraph records={records}/>
-                </Card>
-              </Col>
-            </Row>
+            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Last Week: "/>
+            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={last} range="Last Month: "/>
+            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="All Time: "/>
         </Container>
         </div>
       );

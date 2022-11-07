@@ -11,7 +11,7 @@ const LineGraph = ({records, timeMin, timeMax}) => {
     useEffect(() => {
       var HeartTime = [];
       records.forEach(function (item, index) {
-        var dt = new Date(item._id);
+        var dt = new Date(item.datetime);
         HeartTime.push({x: dt, y: item.heartbeet});
       });
       setRecordsFormat(HeartTime);

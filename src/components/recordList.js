@@ -6,7 +6,7 @@ const port = "5000";
 
 const Record = (props) => (
  <tr>
-  <td>{props.record._id}</td>
+  <td>{props.record.datetime}</td>
    <td>{props.record.tiredness}</td>
    <td>{props.record.heartbeet}</td>
    <td>
