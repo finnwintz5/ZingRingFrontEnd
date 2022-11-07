@@ -32,7 +32,7 @@ const Display = () => {
             const dateString = records[records.length-1];
             const date = parse(dateString, 'yyyyMMddHHmmss', new Date())
             setLatestTime(date);
-            console.log(records);
+            // console.log(records);
         }
         getRecords();
         return;
@@ -60,9 +60,11 @@ const Display = () => {
           </Container>
           <h1>Graphs</h1>
           <Container>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Last Week: "/>
-            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={last} range="Last Month: "/>
-            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="All Time: "/>
+            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Day"/>
+            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={'2022-10-31T18:38:59.777Z'} range="Week"/>
+            <BothCharts records={records} timeMin={'2022-10-31T18:20:53.292Z'} timeMax={last} range="Month"/>
+            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="Year"/>
+            <BothCharts records={records} timeMin={'2022-10-25T15:59:51.214Z'} timeMax={last} range="Year"/>
         </Container>
         </div>
       );
