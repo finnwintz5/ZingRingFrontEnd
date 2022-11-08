@@ -2178,7 +2178,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+<<<<<<< HEAD
+"@typescript-eslint/eslint-plugin@^4.0.0 || ^5.0.0", "@typescript-eslint/eslint-plugin@^5.0.0", "@typescript-eslint/eslint-plugin@^5.5.0":
+=======
 "@typescript-eslint/eslint-plugin@^5.5.0":
+>>>>>>> 5beb79d20b26dc87f79efc2382fb78b0e44f8884
   "integrity" "sha512-5TJh2AgL6+wpL8H/GTSjNb4WrjKoR2rqvFxR/DDTqYNk6uXn8BJMEcncLSpMbf/XV1aS0jAjYwn98uvVCiAywQ=="
   "resolved" "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.42.0.tgz"
   "version" "5.42.0"
@@ -2246,7 +2250,7 @@
     "semver" "^7.3.7"
     "tsutils" "^3.21.0"
 
-"@typescript-eslint/utils@^5.13.0", "@typescript-eslint/utils@5.42.0":
+"@typescript-eslint/utils@^5.10.0", "@typescript-eslint/utils@^5.13.0", "@typescript-eslint/utils@5.42.0":
   "integrity" "sha512-JZ++3+h1vbeG1NUECXQZE3hg0kias9kOtcQr3+JVQ3whnjvKuMyktJAAIj6743OeNPnGBmjj7KEmiDL7qsdnCQ=="
   "resolved" "https://registry.npmjs.org/@typescript-eslint/utils/-/utils-5.42.0.tgz"
   "version" "5.42.0"
@@ -4179,6 +4183,13 @@
   "version" "25.7.0"
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
+
+"eslint-plugin-jest@^27.1.4":
+  "integrity" "sha512-evJ9E9id/z2Fu6LR+ncNySJ6UMs5RiJiv4JsmdA3gPWoq0AR+uZyva738+Y9Uln+3WaYX+3OYP9HJoau94Iurg=="
+  "resolved" "https://registry.npmjs.org/eslint-plugin-jest/-/eslint-plugin-jest-27.1.4.tgz"
+  "version" "27.1.4"
+  dependencies:
+    "@typescript-eslint/utils" "^5.10.0"
 
 "eslint-plugin-jsx-a11y@^6.5.1":
   "integrity" "sha512-sXgFVNHiWffBq23uiS/JaP6eVR622DqwB4yTzKvGZGcPq6/yZ3WmOZfuBks/vHWo9GaFOqC2ZK4i6+C35knx7Q=="
