@@ -2,13 +2,15 @@ import {Chart as ChartJS,CategoryScale,LinearScale,TimeScale,PointElement,LineEl
 import { Line } from "react-chartjs-2";
 import 'chartjs-adapter-date-fns';
 import { useState, useEffect } from "react";
+import { set } from "date-fns";
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend, TimeScale); 
 
-const LineGraph = ({records, timeMin, timeMax}) => {  
+const LineGraph = ({records, timeMin, timeMax, range}) => {  
     const [recordsFormat, setRecordsFormat] = useState([]);
     const [newMin, setNewMin] = useState(null);
     const [newMax, setNewMax] = useState(null);
+    const [unitScale, setUnitScale] = useState(null);
 
     useEffect(() => {
       if(timeMin !== 0){
@@ -20,6 +22,22 @@ const LineGraph = ({records, timeMin, timeMax}) => {
         setNewMax(nm);
       }
     }, [timeMin, timeMax])
+
+    useEffect(() => {
+      if(range === "Day"){
+        setUnitScale('hour');
+      }
+      else if(range === "Week"){
+        setUnitScale('day');
+      }
+      else if(range === "Month"){
+        setUnitScale('day');
+      }
+      else if(range === "Year"){
+        setUnitScale('month');
+      }
+      console.log(range);
+    }, [range])
 
     useEffect(() => {
       var HeartTime = [];
@@ -68,7 +86,9 @@ const LineGraph = ({records, timeMin, timeMax}) => {
                 display: true,
                 text: 'Date'
               },
-              
+              time: {
+                unit: unitScale
+            },
               min: newMin,
               max: newMax
             }

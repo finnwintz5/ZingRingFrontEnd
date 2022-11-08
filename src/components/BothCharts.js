@@ -80,7 +80,7 @@ const BothCharts = ({records, range}) => {
             <p>{"["+formatDate(start_time)+"] to ["+formatDate(end_time)+"]"}</p>
             <Row>
                 <Col sm={8}>
-                    <LineGraph records={records} timeMin={String(start_time)} timeMax={String(end_time)}/>
+                    <LineGraph records={records} timeMin={String(start_time)} timeMax={String(end_time)} range={range}/>
                 </Col>
                 <Col sm={4}>
                         <PieGraph records={records} start_time={start_time} range={range}/>
