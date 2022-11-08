@@ -11,11 +11,11 @@ const LineGraph = ({records, timeMin, timeMax}) => {
     const [newMax, setNewMax] = useState(null);
 
     useEffect(() => {
-      if(timeMin !== null){
+      if(timeMin !== 0){
         var nm = timeMin.substring(0,4)+"-"+timeMin.substring(4,6)+"-"+timeMin.substring(6,8)+"T"+timeMin.substring(8,10)+":"+timeMin.substring(10,12)+":"+timeMin.substring(12,14)+".000Z";
         setNewMin(nm);
       }
-      if(timeMax !== null){
+      if(timeMax !== 0){
         var nm = timeMax.substring(0,4)+"-"+timeMax.substring(4,6)+"-"+timeMax.substring(6,8)+"T"+timeMax.substring(8,10)+":"+timeMax.substring(10,12)+":"+timeMax.substring(12,14)+".000Z";
         setNewMax(nm);
       }

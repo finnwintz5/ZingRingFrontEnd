@@ -11,7 +11,7 @@ const Display = () => {
     const [latestTiredness, setLatestTiredness] = useState("");
     const [latestHeartbeat, setLatestHeartbeat] = useState("");
     const [last, setLast] = useState(null);
-    const port = "5000";
+    const port = "8080";
 
     useEffect(() => {
         async function getRecords() {
